@@ -72,57 +72,91 @@ def simplify(matrix):
     return matrix
 
 def getScreen(row, col):
-    tmp = [' '] * col
-    result = []
-    for i in range(row):
-        result.append(tmp[:])
-    return result
-
+    # tmp = [' '] * col
+    # result = []
+    # for i in range(row):
+    #     result.append(tmp[:])
+    # return result
+    tmp = [' '] * row * col
     
 
 
     
-def main( a = 0.2, b = 0.2, c = 0.2):
+def main(theta:list = [0,0,0], a = 0.2, b = 0.2, c = 0.2):
     
     
     thetaA,thetaB,thetaC = theta[0], theta[1], theta[2]
-    while True:
+    # while True:
         
-        screen = getScreen(30,30)
+    #     screen = getScreen(30,30)
 
-        matrix = show(thetaA,thetaB,thetaC)
-        m1, m2, m3 = map(simplify, matrix)
+    #     matrix = show(thetaA,thetaB,thetaC)
+    #     m1, m2, m3 = map(simplify, matrix)
 
-        for _ in m1:
-            x, y, z = _[0]+15, _[1]+15, _[2]+15
-            screen[y][z] = '#'
+    #     for _ in m1:
+    #         x, y, z = _[0]+15, _[1]+15, _[2]+15
+    #         screen[y][z] = '#'
 
-        for _ in m2:
-            x, y, z = _[0]+15, _[1]+15, _[2]+15
-            screen[y][z] = '.'
+    #     for _ in m2:
+    #         x, y, z = _[0]+15, _[1]+15, _[2]+15
+    #         screen[y][z] = '.'
 
-        for _ in m3:
-            x, y, z = _[0]+15, _[1]+15, _[2]+15
-            screen[y][z] = '-'
+    #     for _ in m3:
+    #         x, y, z = _[0]+15, _[1]+15, _[2]+15
+    #         screen[y][z] = '-'
             
 
 
-        prom = ''
-        for i in range(len(screen)):
-            # prom = prom + "[%02d] " % i
-            for j in range(len(screen)):
-                prom = prom + screen[i][j]
-            prom = prom + '\n'
+    #     prom = ''
+    #     for i in range(len(screen)):
+    #         # prom = prom + "[%02d] " % i
+    #         for j in range(len(screen)):
+    #             prom = prom + screen[i][j]
+    #         prom = prom + '\n'
 
 
-        thetaA = thetaA + a
-        thetaB = thetaB + b
-        thetaC = thetaC + c
+    #     thetaA = thetaA + a
+    #     thetaB = thetaB + b
+    #     thetaC = thetaC + c
 
-        os.system('cls')
-        print(prom)
-        time.sleep(0.01)    
+    #     os.system('cls')
+    #     print(prom)
+    #     time.sleep(0.01)    
+    
+    screen = getScreen(30,30)
 
+    matrix = show(thetaA,thetaB,thetaC)
+    m1, m2, m3 = map(simplify, matrix)
+
+    for _ in m1:
+        x, y, z = _[0]+15, _[1]+15, _[2]+15
+        screen[y][z] = '#'
+
+    for _ in m2:
+        x, y, z = _[0]+15, _[1]+15, _[2]+15
+        screen[y][z] = '.'
+
+    for _ in m3:
+        x, y, z = _[0]+15, _[1]+15, _[2]+15
+        screen[y][z] = '-'
+        
+
+
+    prom = ''
+    for i in range(len(screen)):
+        # prom = prom + "[%02d] " % i
+        for j in range(len(screen)):
+            prom = prom + screen[i][j]
+        prom = prom + '\n'
+
+
+    thetaA = thetaA + a
+    thetaB = thetaB + b
+    thetaC = thetaC + c
+
+    os.system('cls')
+    print(prom)
+    time.sleep(0.01)
 
 
 
