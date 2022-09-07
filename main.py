@@ -72,73 +72,35 @@ def simplify(matrix):
     return matrix
 
 def getScreen(row, col):
-    # tmp = [' '] * col
-    # result = []
-    # for i in range(row):
-    #     result.append(tmp[:])
-    # return result
+
     tmp = [' '] * row * col
-    
+    result = [tmp[i * col: (i + 1) * col] for i in range(row)]
+    return result
 
-
+def paintScreen(screen:list, coordinates:list, chara:str = '#', margin:int = 15, directrion:str = 'x'):
+    for _ in coordinates:
+        # x = -[1] + 15
+        y, z = _[1]+15, _[2]+15
+        screen[y][z] = chara
     
-def main(theta:list = [0,0,0], a = 0.2, b = 0.2, c = 0.2):
+    
+def run(theta:list = [0,0,0], a = 0.2, b = 0.2, c = 0.2):
     
     
     thetaA,thetaB,thetaC = theta[0], theta[1], theta[2]
-    # while True:
-        
-    #     screen = getScreen(30,30)
-
-    #     matrix = show(thetaA,thetaB,thetaC)
-    #     m1, m2, m3 = map(simplify, matrix)
-
-    #     for _ in m1:
-    #         x, y, z = _[0]+15, _[1]+15, _[2]+15
-    #         screen[y][z] = '#'
-
-    #     for _ in m2:
-    #         x, y, z = _[0]+15, _[1]+15, _[2]+15
-    #         screen[y][z] = '.'
-
-    #     for _ in m3:
-    #         x, y, z = _[0]+15, _[1]+15, _[2]+15
-    #         screen[y][z] = '-'
-            
-
-
-    #     prom = ''
-    #     for i in range(len(screen)):
-    #         # prom = prom + "[%02d] " % i
-    #         for j in range(len(screen)):
-    #             prom = prom + screen[i][j]
-    #         prom = prom + '\n'
-
-
-    #     thetaA = thetaA + a
-    #     thetaB = thetaB + b
-    #     thetaC = thetaC + c
-
-    #     os.system('cls')
-    #     print(prom)
-    #     time.sleep(0.01)    
     
     screen = getScreen(30,30)
 
     matrix = show(thetaA,thetaB,thetaC)
     m1, m2, m3 = map(simplify, matrix)
 
-    for _ in m1:
-        x, y, z = _[0]+15, _[1]+15, _[2]+15
-        screen[y][z] = '#'
 
-    for _ in m2:
-        x, y, z = _[0]+15, _[1]+15, _[2]+15
-        screen[y][z] = '.'
 
-    for _ in m3:
-        x, y, z = _[0]+15, _[1]+15, _[2]+15
-        screen[y][z] = '-'
+    paintScreen(screen=screen, coordinates=m1, chara='#')
+    paintScreen(screen=screen, coordinates=m2, chara='.')
+    paintScreen(screen=screen, coordinates=m3, chara='_')
+
+
         
 
 
@@ -150,9 +112,10 @@ def main(theta:list = [0,0,0], a = 0.2, b = 0.2, c = 0.2):
         prom = prom + '\n'
 
 
-    thetaA = thetaA + a
-    thetaB = thetaB + b
-    thetaC = thetaC + c
+    theta[0] = theta[0] + a
+    theta[1] = theta[1] + b
+    theta[2] = theta[2] + c
+    
 
     os.system('cls')
     print(prom)
@@ -165,12 +128,14 @@ if __name__ == '__main__':
     theta = [0,0,0]
     try:
         a,b,c = map(lambda x: int(x)/10, t)
-        main(a=a, b=b, c=c)
+        while True:
+            run(theta=theta, a=a, b=b, c=c)
     except KeyboardInterrupt:
         pass
     except:
         try:
-            main()
+            while True:
+                run(theta=theta)
         except KeyboardInterrupt:
             pass
     
